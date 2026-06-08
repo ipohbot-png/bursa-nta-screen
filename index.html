@@ -1,1 +1,294 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Bursa NTA Screen</title><script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script><style>body{font-family:system-ui;background:#0f172a;color:#e2e8f0;padding:20px}.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:13px}a{color:#60a5fa}button{cursor:pointer}</style></head><body><div id="r"></div><script type="text/babel">const D=[{n:"PRTASCO",c:"5070",s:"Construction",p:0.2,t:0.81,b:0.25,m:99,r:17.91,d:0},{n:"GOLDIS",c:"5082",s:"Property",p:1.36,t:4.37,b:0.31,m:937,r:7.29,d:4.41},{n:"EKOVEST",c:"8079",s:"Construction",p:0.44,t:1.43,b:0.31,m:468,r:9.52,d:0},{n:"HAPSENG",c:"3034",s:"Property",p:1.48,t:4.34,b:0.34,m:2369,r:4.63,d:0},{n:"BONIA",c:"9423",s:"Retailers",p:0.8,t:2.15,b:0.37,m:228,r:11.23,d:5},{n:"BKAWAN",c:"1899",s:"Plantation",p:15.6,t:38.93,b:0.4,m:2033,r:3.54,d:2.56},{n:"OSK",c:"5053",s:"Property",p:1.12,t:2.77,b:0.4,m:1380,r:6.53,d:2.68},{n:"TOMEI",c:"7230",s:"Retailers",p:1.79,t:4.47,b:0.4,m:248,r:21.16,d:1.12},{n:"TAMBUN",c:"5191",s:"Property",p:0.76,t:1.74,b:0.44,m:337,r:7.01,d:6.58},{n:"HLIB",c:"5819",s:"Financial",p:2.4,t:5.41,b:0.44,m:1944,r:7.95,d:4.58},{n:"MYEG",c:"0138",s:"Technology",p:0.795,t:1.78,b:0.45,m:2688,r:15.29,d:4.78},{n:"HAIO",c:"7668",s:"Retailers",p:1.86,t:4.03,b:0.46,m:435,r:6.54,d:5.38},{n:"KFIMA",c:"6491",s:"Industrial",p:1.66,t:3.62,b:0.46,m:323,r:9.97,d:3.61},{n:"KERJAYA",c:"7161",s:"Construction",p:1.54,t:3.28,b:0.47,m:1831,r:8.88,d:1.95},{n:"MFCB",c:"3069",s:"Energy",p:3.43,t:7.01,b:0.49,m:1508,r:9.71,d:2.33},{n:"IGB",c:"1597",s:"Property",p:2.22,t:4.52,b:0.49,m:3107,r:2.83,d:1.8},{n:"YINSON",c:"7293",s:"Energy",p:2.46,t:5.22,b:0.47,m:3200,r:-7.84,d:0},{n:"VANTNRG",c:"5218",s:"Energy",p:0.295,t:1.32,b:0.22,m:683,r:122,d:0}].sort((a,b)=>a.b-b.b);function col(v){return v<=0.2?"#a78bfa":v<=0.3?"#ef4444":v<=0.4?"#f59e0b":"#3b82f6"}function App(){const[mx,setMx]=React.useState(0.5);const fd=D.filter(x=>x.b<=mx);return(<div><h1 style={{fontSize:18,fontWeight:700,color:"#f1f5f9",marginBottom:8}}>Bursa Malaysia - Price vs NTA Screen</h1><p style={{fontSize:12,color:"#64748b",marginBottom:12}}>KLSE Screener - Screened {new Date().toLocaleDateString("en-MY")} - PTBV at or below 0.50</p><div style={{marginBottom:12,display:"flex",gap:6}}>{[0.2,0.3,0.4,0.5].map(v=><button key={v} onClick={()=>setMx(v)} style={{padding:"4px 10px",borderRadius:4,border:"none",background:mx===v?"#3b82f6":"#334155",color:mx===v?"#fff":"#94a3b8",fontWeight:600,fontSize:12}}>{v}</button>)}<span style={{marginLeft:"auto",fontSize:13,fontWeight:700,color:"#f1f5f9"}}>{fd.length} stocks</span></div><div style={{background:"#1e293b",borderRadius:8,overflow:"hidden"}}><div className="tw"><table><thead><tr style={{background:"#0f172a"}}>{["#","Name","Code","Sector","Price","NTA","PTBV","Disc","MCap","ROE","DY"].map(h=><th key={h} style={{padding:"7px 10px",textAlign:["#","Name","Sector"].includes(h)?"left":"right",color:"#475569",fontWeight:600,fontSize:11,textTransform:"uppercase",borderBottom:"2px solid #334155"}}>{h}</th>)}</tr></thead><tbody>{fd.map((d,i)=>{const c=col(d.b);return(<tr key={d.c} style={{borderBottom:"1px solid #0f172a",background:i%2?"#172031":"#1e293b"}}><td style={{padding:"6px 10px",color:"#475569",fontSize:11}}>{i+1}</td><td style={{padding:"6px 10px",fontWeight:600}}><a href={"https://www.klsescreener.com/v2/stocks/view/"+d.c} target="_blank" rel="noreferrer">{d.n}</a></td><td style={{padding:"6px 10px",color:"#64748b",textAlign:"right",fontFamily:"monospace"}}>{d.c}</td><td style={{padding:"6px 10px",color:"#64748b",fontSize:11}}>{d.s}</td><td style={{padding:"6px 10px",textAlign:"right",fontWeight:600,color:"#f1f5f9",fontFamily:"monospace"}}>{d.p.toFixed(3)}</td><td style={{padding:"6px 10px",textAlign:"right",color:"#34d399",fontFamily:"monospace"}}>{d.t.toFixed(2)}</td><td style={{padding:"6px 10px",textAlign:"right"}}><span style={{background:c+"20",color:c,border:"1px solid "+c+"50",borderRadius:4,padding:"2px 6px",fontWeight:700,fontFamily:"monospace",fontSize:12}}>{d.b.toFixed(2)}</span></td><td style={{padding:"6px 10px",textAlign:"right",color:c,fontWeight:700,fontFamily:"monospace"}}>{Math.round((1-d.b)*100)}%</td><td style={{padding:"6px 10px",textAlign:"right",color:"#94a3b8",fontFamily:"monospace"}}>{d.m>=1000?(d.m/1000).toFixed(1)+"B":d.m+"M"}</td><td style={{padding:"6px 10px",textAlign:"right",fontFamily:"monospace",color:d.r>8?"#34d399":d.r>0?"#86efac":"#f87171"}}>{d.r.toFixed(1)}%</td><td style={{padding:"6px 10px",textAlign:"right",fontFamily:"monospace",color:d.d>3?"#fbbf24":d.d>0?"#fde68a":"#475569"}}>{d.d>0?d.d.toFixed(1)+"%":"—"}</td></tr>)})}</tbody></table></div></div><p style={{color:"#334155",fontSize:11,marginTop:12}}>Source: KLSE Screener - Not financial advice</p></div>);}ReactDOM.createRoot(document.getElementById("r")).render(React.createElement(App));</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bursa Malaysia — Price vs NTA Screen | KLSE Screener</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',system-ui,sans-serif;background:#0f172a;color:#e2e8f0;min-height:100vh}
+  ::-webkit-scrollbar{width:6px;height:6px}
+  ::-webkit-scrollbar-track{background:#1e293b}
+  ::-webkit-scrollbar-thumb{background:#334155;border-radius:3px}
+  a{color:#60a5fa;text-decoration:none}
+  a:hover{text-decoration:underline}
+  select{cursor:pointer}
+  button{cursor:pointer;transition:opacity 0.15s}
+  button:hover{opacity:0.85}
+  .table-wrap{overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const DATA_RAW = [
+{"name":"MUIPROP","code":"3913","sector":"Property","price":0.185,"nta":0.530,"ptbv":0.35,"mcap":141.35,"roe":27.41,"dy":62.16,"pe":1.27},
+{"name":"TOMEI","code":"7230","sector":"Retailers","price":1.790,"nta":4.470,"ptbv":0.40,"mcap":248.09,"roe":21.16,"dy":1.12,"pe":1.89},
+{"name":"PRTASCO","code":"5070","sector":"Construction","price":0.200,"nta":0.810,"ptbv":0.25,"mcap":99.08,"roe":17.91,"dy":0,"pe":1.38},
+{"name":"POHKONG","code":"5080","sector":"Retailers","price":0.730,"nta":2.800,"ptbv":0.26,"mcap":207.73,"roe":-0.37,"dy":0,"pe":null},
+{"name":"ENGTEX","code":"5055","sector":"Industrial Products","price":0.840,"nta":2.090,"ptbv":0.40,"mcap":192.78,"roe":4.87,"dy":1.19,"pe":8.21},
+{"name":"SRIDGE","code":"7697","sector":"Construction","price":0.490,"nta":2.150,"ptbv":0.23,"mcap":80.34,"roe":-3.75,"dy":0,"pe":null},
+{"name":"JTIASA","code":"4383","sector":"Plantation","price":0.735,"nta":1.970,"ptbv":0.37,"mcap":563.43,"roe":0.88,"dy":0,"pe":42.62},
+{"name":"TASEK","code":"4448","sector":"Industrial Products","price":3.480,"nta":11.260,"ptbv":0.31,"mcap":222.72,"roe":-1.46,"dy":2.16,"pe":null},
+{"name":"EKOVEST","code":"8079","sector":"Construction","price":0.440,"nta":1.430,"ptbv":0.31,"mcap":468.26,"roe":9.52,"dy":0,"pe":3.52},
+{"name":"BSTEAD","code":"2771","sector":"Industrial Products","price":0.335,"nta":0.990,"ptbv":0.34,"mcap":555.84,"roe":-2.02,"dy":0,"pe":null},
+{"name":"GOLDIS","code":"5082","sector":"Property","price":1.360,"nta":4.370,"ptbv":0.31,"mcap":937.11,"roe":7.29,"dy":4.41,"pe":5.50},
+{"name":"TAMBUN","code":"5191","sector":"Property","price":0.760,"nta":1.740,"ptbv":0.44,"mcap":337.36,"roe":7.01,"dy":6.58,"pe":6.38},
+{"name":"MITRA","code":"5286","sector":"Transportation","price":0.295,"nta":1.230,"ptbv":0.24,"mcap":60.71,"roe":-4.80,"dy":0,"pe":null},
+{"name":"SRSB","code":"9121","sector":"Property","price":0.350,"nta":1.000,"ptbv":0.35,"mcap":75.88,"roe":-1.72,"dy":0,"pe":null},
+{"name":"PARKSON","code":"5657","sector":"Retailers","price":0.275,"nta":0.880,"ptbv":0.31,"mcap":301.45,"roe":-6.48,"dy":0,"pe":null},
+{"name":"IGB","code":"1597","sector":"Property","price":2.220,"nta":4.520,"ptbv":0.49,"mcap":3107.36,"roe":2.83,"dy":1.80,"pe":17.81},
+{"name":"HAPSENG","code":"3034","sector":"Property","price":1.480,"nta":4.340,"ptbv":0.34,"mcap":2369.26,"roe":4.63,"dy":0,"pe":10.78},
+{"name":"KSL","code":"5038","sector":"Property","price":1.040,"nta":2.970,"ptbv":0.35,"mcap":678.00,"roe":4.27,"dy":0,"pe":8.25},
+{"name":"MRCB","code":"1651","sector":"Property","price":0.610,"nta":1.640,"ptbv":0.37,"mcap":1049.13,"roe":-0.11,"dy":0,"pe":null},
+{"name":"SURIA","code":"6084","sector":"Energy","price":1.470,"nta":3.190,"ptbv":0.46,"mcap":1081.07,"roe":6.41,"dy":4.08,"pe":10.56},
+{"name":"BPURI","code":"9695","sector":"Construction","price":0.195,"nta":0.560,"ptbv":0.35,"mcap":66.54,"roe":-8.07,"dy":0,"pe":null},
+{"name":"CHOOBEE","code":"5797","sector":"Industrial Products","price":1.050,"nta":2.640,"ptbv":0.40,"mcap":132.21,"roe":6.68,"dy":1.90,"pe":8.87},
+{"name":"LBS","code":"5789","sector":"Property","price":0.615,"nta":1.440,"ptbv":0.43,"mcap":786.73,"roe":5.33,"dy":3.25,"pe":10.48},
+{"name":"TANCO","code":"4928","sector":"Property","price":0.225,"nta":0.610,"ptbv":0.37,"mcap":115.47,"roe":-10.25,"dy":0,"pe":null},
+{"name":"BONIA","code":"9423","sector":"Retailers","price":0.800,"nta":2.150,"ptbv":0.37,"mcap":227.73,"roe":11.23,"dy":5.00,"pe":6.09},
+{"name":"MALTON","code":"6181","sector":"Property","price":0.480,"nta":1.260,"ptbv":0.38,"mcap":257.06,"roe":3.72,"dy":0,"pe":12.12},
+{"name":"TSR","code":"9113","sector":"Construction","price":0.425,"nta":1.690,"ptbv":0.25,"mcap":67.55,"roe":-1.83,"dy":0,"pe":null},
+{"name":"PRKCORP","code":"5235","sector":"Industrial Products","price":1.440,"nta":5.070,"ptbv":0.28,"mcap":187.81,"roe":-0.44,"dy":0,"pe":null},
+{"name":"KLUANG","code":"2453","sector":"Plantation","price":3.500,"nta":12.870,"ptbv":0.27,"mcap":91.00,"roe":2.86,"dy":1.43,"pe":28.69},
+{"name":"GLOMAC","code":"5020","sector":"Property","price":0.350,"nta":0.880,"ptbv":0.40,"mcap":261.60,"roe":6.52,"dy":5.71,"pe":5.08},
+{"name":"OSK","code":"5053","sector":"Property","price":1.120,"nta":2.770,"ptbv":0.40,"mcap":1380.19,"roe":6.53,"dy":2.68,"pe":6.37},
+{"name":"YINSON","code":"7293","sector":"Energy","price":2.460,"nta":5.220,"ptbv":0.47,"mcap":3199.61,"roe":-7.84,"dy":0,"pe":null},
+{"name":"FITTERS","code":"9318","sector":"Industrial Products","price":0.265,"nta":0.710,"ptbv":0.37,"mcap":78.32,"roe":-1.41,"dy":0,"pe":null},
+{"name":"MNHLDG","code":"3921","sector":"Property","price":0.545,"nta":1.570,"ptbv":0.35,"mcap":131.69,"roe":-3.18,"dy":0,"pe":null},
+{"name":"BKAWAN","code":"1899","sector":"Plantation","price":15.600,"nta":38.930,"ptbv":0.40,"mcap":2033.46,"roe":3.54,"dy":2.56,"pe":27.59},
+{"name":"SAPIND","code":"8575","sector":"Plantation","price":0.385,"nta":0.930,"ptbv":0.41,"mcap":228.90,"roe":-2.15,"dy":0,"pe":null},
+{"name":"MTAG","code":"5301","sector":"Technology","price":0.435,"nta":0.950,"ptbv":0.46,"mcap":200.45,"roe":1.55,"dy":0,"pe":29.00},
+{"name":"PECCA","code":"7221","sector":"Consumer Products","price":0.785,"nta":1.770,"ptbv":0.44,"mcap":162.67,"roe":8.35,"dy":4.46,"pe":12.49},
+{"name":"KFIMA","code":"6491","sector":"Industrial Products","price":1.660,"nta":3.620,"ptbv":0.46,"mcap":323.11,"roe":9.97,"dy":3.61,"pe":8.45},
+{"name":"TITIJYA","code":"5239","sector":"Property","price":0.285,"nta":0.740,"ptbv":0.39,"mcap":195.12,"roe":6.50,"dy":0,"pe":6.00},
+{"name":"HLIB","code":"5819","sector":"Financial Services","price":2.400,"nta":5.410,"ptbv":0.44,"mcap":1944.00,"roe":7.95,"dy":4.58,"pe":9.50},
+{"name":"TROP","code":"5401","sector":"Property","price":1.370,"nta":3.130,"ptbv":0.44,"mcap":1708.37,"roe":5.00,"dy":3.65,"pe":9.60},
+{"name":"CHINWEL","code":"5007","sector":"Industrial Products","price":1.090,"nta":2.460,"ptbv":0.44,"mcap":273.74,"roe":-1.22,"dy":0,"pe":null},
+{"name":"KINSTEL","code":"9441","sector":"Industrial Products","price":0.305,"nta":1.070,"ptbv":0.29,"mcap":57.44,"roe":-4.67,"dy":0,"pe":null},
+{"name":"PARAMON","code":"1724","sector":"Property","price":0.855,"nta":1.840,"ptbv":0.46,"mcap":244.58,"roe":-0.54,"dy":0,"pe":null},
+{"name":"MYEG","code":"0138","sector":"Technology","price":0.795,"nta":1.780,"ptbv":0.45,"mcap":2688.00,"roe":15.29,"dy":4.78,"pe":11.21},
+{"name":"WASEONG","code":"5142","sector":"Energy","price":0.860,"nta":1.870,"ptbv":0.46,"mcap":527.95,"roe":9.83,"dy":2.33,"pe":6.99},
+{"name":"UTDPLT","code":"2089","sector":"Plantation","price":14.740,"nta":30.460,"ptbv":0.48,"mcap":1235.01,"roe":3.38,"dy":1.36,"pe":25.67},
+{"name":"TEXCHEM","code":"8702","sector":"Industrial Products","price":0.610,"nta":1.350,"ptbv":0.45,"mcap":64.27,"roe":-3.70,"dy":0,"pe":null},
+{"name":"HAIO","code":"7668","sector":"Retailers","price":1.860,"nta":4.030,"ptbv":0.46,"mcap":434.97,"roe":6.54,"dy":5.38,"pe":17.82},
+{"name":"AMPROP","code":"1007","sector":"Property","price":0.285,"nta":0.600,"ptbv":0.48,"mcap":166.07,"roe":-1.67,"dy":0,"pe":null},
+{"name":"MFCB","code":"3069","sector":"Energy","price":3.430,"nta":7.010,"ptbv":0.49,"mcap":1507.91,"roe":9.71,"dy":2.33,"pe":8.75},
+{"name":"KERJAYA","code":"7161","sector":"Construction","price":1.540,"nta":3.280,"ptbv":0.47,"mcap":1830.73,"roe":8.88,"dy":1.95,"pe":10.47},
+{"name":"HUAT LAI","code":"7178","sector":"Consumer Products","price":1.410,"nta":3.020,"ptbv":0.47,"mcap":87.57,"roe":7.15,"dy":3.55,"pe":13.86},
+{"name":"SCNWOLF","code":"7168","sector":"Property","price":0.265,"nta":0.680,"ptbv":0.39,"mcap":119.51,"roe":-5.88,"dy":0,"pe":null},
+{"name":"SEACERA","code":"5009","sector":"Industrial Products","price":0.135,"nta":0.420,"ptbv":0.32,"mcap":36.98,"roe":-7.14,"dy":0,"pe":null},
+{"name":"NAKA","code":"7035","sector":"Consumer Products","price":0.790,"nta":1.660,"ptbv":0.48,"mcap":96.17,"roe":-3.01,"dy":0,"pe":null},
+{"name":"ARANK","code":"1481","sector":"Industrial Products","price":1.450,"nta":3.330,"ptbv":0.44,"mcap":60.90,"roe":-0.30,"dy":0,"pe":null},
+{"name":"PINEAPP","code":"4320","sector":"Industrial Products","price":2.380,"nta":5.160,"ptbv":0.46,"mcap":85.04,"roe":-0.60,"dy":0,"pe":null},
+{"name":"KOMARK","code":"7083","sector":"Industrial Products","price":0.585,"nta":1.250,"ptbv":0.47,"mcap":58.82,"roe":-0.80,"dy":0,"pe":null},
+{"name":"SMRT","code":"0229","sector":"Technology","price":0.080,"nta":0.250,"ptbv":0.32,"mcap":52.27,"roe":-13.33,"dy":0,"pe":null},
+{"name":"PMHLDG","code":"8346","sector":"Industrial Products","price":1.020,"nta":2.780,"ptbv":0.37,"mcap":97.03,"roe":-2.96,"dy":0,"pe":null},
+{"name":"PERDUREN","code":"5193","sector":"Industrial Products","price":0.455,"nta":1.210,"ptbv":0.38,"mcap":109.01,"roe":-0.16,"dy":0,"pe":null},
+{"name":"MCLEAN","code":"0108","sector":"Industrial Products","price":0.245,"nta":0.650,"ptbv":0.38,"mcap":14.56,"roe":-0.46,"dy":0,"pe":null},
+{"name":"SERNKOU","code":"9792","sector":"Industrial Products","price":0.600,"nta":1.440,"ptbv":0.42,"mcap":32.40,"roe":-1.67,"dy":0,"pe":null},
+{"name":"GUNUNG","code":"7676","sector":"Energy","price":0.300,"nta":0.720,"ptbv":0.42,"mcap":57.38,"roe":-2.04,"dy":0,"pe":null},
+{"name":"VANTNRG","code":"5218","sector":"Energy","price":0.295,"nta":1.320,"ptbv":0.22,"mcap":683.47,"roe":122.00,"dy":0,"pe":0.18}
+];
+
+// Deduplicate
+const seen = new Set();
+const DATA = DATA_RAW.filter(d => { if(seen.has(d.code)) return false; seen.add(d.code); return true; })
+  .map(d => ({...d, discount: Math.round((1-d.ptbv)*100)}))
+  .sort((a,b) => a.ptbv - b.ptbv);
+
+const SECTORS = ["All", ...new Set(DATA.map(d=>d.sector))].filter((v,i,a)=>a.indexOf(v)===i);
+
+function ptbvColor(v) {
+  if(v<=0.2) return "#a78bfa";
+  if(v<=0.3) return "#ef4444";
+  if(v<=0.4) return "#f59e0b";
+  return "#3b82f6";
+}
+
+function App() {
+  const [sector, setSector] = React.useState("All");
+  const [maxPtbv, setMaxPtbv] = React.useState(0.5);
+  const [onlyProfit, setOnlyProfit] = React.useState(false);
+  const [onlyDiv, setOnlyDiv] = React.useState(false);
+  const [sortBy, setSortBy] = React.useState("ptbv");
+  const [search, setSearch] = React.useState("");
+
+  const filtered = React.useMemo(() => {
+    let d = DATA.filter(x => x.ptbv <= maxPtbv);
+    if(sector !== "All") d = d.filter(x => x.sector === sector);
+    if(onlyProfit) d = d.filter(x => x.roe > 0);
+    if(onlyDiv) d = d.filter(x => x.dy > 0);
+    if(search) { const q = search.toLowerCase(); d = d.filter(x => x.name.toLowerCase().includes(q) || x.code.includes(q) || x.sector.toLowerCase().includes(q)); }
+    return [...d].sort((a,b) => sortBy==="ptbv" ? a.ptbv-b.ptbv : sortBy==="discount" ? b.discount-a.discount : sortBy==="mcap" ? b.mcap-a.mcap : sortBy==="roe" ? b.roe-a.roe : b.dy-a.dy);
+  }, [sector, maxPtbv, onlyProfit, onlyDiv, sortBy, search]);
+
+  const tierCounts = React.useMemo(() => ({
+    extreme: DATA.filter(d=>d.ptbv<=0.2).length,
+    deep: DATA.filter(d=>d.ptbv>0.2&&d.ptbv<=0.3).length,
+    strong: DATA.filter(d=>d.ptbv>0.3&&d.ptbv<=0.4).length,
+    notable: DATA.filter(d=>d.ptbv>0.4&&d.ptbv<=0.5).length,
+  }), []);
+
+  const pill = (label, val, active, set, activeColor="#3b82f6") => (
+    <button onClick={()=>set(val)} style={{padding:"5px 12px",borderRadius:"6px",border:"none",fontSize:"12px",fontWeight:600,
+      background:active===val?activeColor:"#334155",color:active===val?"#fff":"#94a3b8"}}>
+      {label}
+    </button>
+  );
+
+  const toggle = (label, val, set, color="#10b981") => (
+    <button onClick={()=>set(!val)} style={{padding:"5px 12px",borderRadius:"6px",
+      border:`1px solid ${val?color:"#475569"}`,fontSize:"12px",fontWeight:600,
+      background:val?`${color}22`:"transparent",color:val?color:"#94a3b8"}}>
+      {label}
+    </button>
+  );
+
+  return (
+    <div style={{background:"#0f172a",minHeight:"100vh",color:"#e2e8f0",padding:"24px",fontFamily:"'Inter',system-ui,sans-serif"}}>
+      {/* Header */}
+      <div style={{marginBottom:"22px"}}>
+        <div style={{display:"flex",alignItems:"center",gap:"12px",marginBottom:"10px"}}>
+          <div style={{width:"42px",height:"42px",background:"linear-gradient(135deg,#3b82f6,#8b5cf6)",borderRadius:"10px",
+            display:"flex",alignItems:"center",justifyContent:"center",fontSize:"22px",flexShrink:0}}>📉</div>
+          <div>
+            <h1 style={{fontSize:"20px",fontWeight:700,color:"#f1f5f9",margin:0}}>Bursa Malaysia — Price vs NTA Screener</h1>
+            <p style={{fontSize:"12px",color:"#64748b",margin:0}}>
+              Source: KLSE Screener · Screened {new Date().toLocaleDateString("en-MY",{day:"numeric",month:"short",year:"numeric"})} · PTBV ≤ 0.50 · Positive NTA · {DATA.length} stocks
+            </p>
+          </div>
+        </div>
+        {/* Tier pills */}
+        <div style={{display:"flex",gap:"8px",flexWrap:"wrap"}}>
+          {[["≥80% below NTA",tierCounts.extreme,"#7c3aed"],["70–80% below",tierCounts.deep,"#ef4444"],
+            ["60–70% below",tierCounts.strong,"#f59e0b"],["50–60% below",tierCounts.notable,"#3b82f6"]].map(([l,n,c])=>(
+            <div key={l} style={{background:`${c}18`,border:`1px solid ${c}44`,borderRadius:"6px",padding:"4px 12px",fontSize:"12px",display:"flex",gap:"6px",alignItems:"center"}}>
+              <span style={{color:c,fontWeight:700}}>{n}</span><span style={{color:"#64748b"}}>{l}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Controls */}
+      <div style={{background:"#1e293b",borderRadius:"10px",padding:"16px",marginBottom:"16px"}}>
+        <div style={{display:"flex",gap:"12px",flexWrap:"wrap",alignItems:"flex-end"}}>
+          {/* Search */}
+          <div>
+            <div style={{fontSize:"11px",color:"#475569",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"6px"}}>Search</div>
+            <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Name / code / sector…"
+              style={{background:"#0f172a",border:"1px solid #334155",borderRadius:"6px",padding:"5px 10px",color:"#e2e8f0",fontSize:"12px",width:"170px"}}/>
+          </div>
+          {/* Max PTBV */}
+          <div>
+            <div style={{fontSize:"11px",color:"#475569",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"6px"}}>Max PTBV</div>
+            <div style={{display:"flex",gap:"4px"}}>
+              {[0.2,0.3,0.4,0.5].map(v=>pill(v,v,maxPtbv,setMaxPtbv))}
+            </div>
+          </div>
+          {/* Sector */}
+          <div>
+            <div style={{fontSize:"11px",color:"#475569",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"6px"}}>Sector</div>
+            <select value={sector} onChange={e=>setSector(e.target.value)}
+              style={{background:"#0f172a",border:"1px solid #334155",borderRadius:"6px",padding:"5px 10px",color:"#e2e8f0",fontSize:"12px"}}>
+              {SECTORS.map(s=><option key={s}>{s}</option>)}
+            </select>
+          </div>
+          {/* Sort */}
+          <div>
+            <div style={{fontSize:"11px",color:"#475569",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"6px"}}>Sort by</div>
+            <div style={{display:"flex",gap:"4px"}}>
+              {[["PTBV","ptbv"],["Discount","discount"],["MCap","mcap"],["ROE","roe"],["DY","dy"]].map(([l,v])=>pill(l,v,sortBy,setSortBy,"#8b5cf6"))}
+            </div>
+          </div>
+          {/* Filters */}
+          <div>
+            <div style={{fontSize:"11px",color:"#475569",textTransform:"uppercase",letterSpacing:"0.06em",marginBottom:"6px"}}>Filter</div>
+            <div style={{display:"flex",gap:"6px"}}>
+              {toggle("Profitable",onlyProfit,setOnlyProfit)}
+              {toggle("Dividend",onlyDiv,setOnlyDiv,"#f59e0b")}
+            </div>
+          </div>
+          <div style={{marginLeft:"auto",textAlign:"right"}}>
+            <div style={{fontSize:"11px",color:"#475569",textTransform:"uppercase",letterSpacing:"0.06em"}}>Showing</div>
+            <div style={{fontSize:"20px",fontWeight:700,color:"#f1f5f9"}}>{filtered.length}</div>
+          </div>
+        </div>
+      </div>
+
+      {/* Table */}
+      <div style={{background:"#1e293b",borderRadius:"10px",overflow:"hidden"}}>
+        <div className="table-wrap">
+          <table>
+            <thead>
+              <tr style={{background:"#0f172a"}}>
+                {["#","Name","Code","Sector","Price","NTA","PTBV","Discount","MCap (M)","ROE","DY"].map(h=>(
+                  <th key={h} style={{padding:"10px 14px",textAlign:["Name","Sector","#"].includes(h)?"left":"right",
+                    color:"#475569",fontWeight:600,fontSize:"11px",textTransform:"uppercase",letterSpacing:"0.06em",
+                    whiteSpace:"nowrap",borderBottom:"2px solid #334155"}}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((d,i)=>{
+                const c = ptbvColor(d.ptbv);
+                const discW = Math.min(d.discount, 100);
+                return (
+                  <tr key={d.code} style={{borderBottom:"1px solid #0f172a",background:i%2===0?"#1e293b":"#17253a"}}>
+                    <td style={{padding:"9px 14px",color:"#334155",textAlign:"left",fontFamily:"monospace",fontSize:"11px"}}>{i+1}</td>
+                    <td style={{padding:"9px 14px",fontWeight:600,whiteSpace:"nowrap"}}>
+                      <a href={`https://www.klsescreener.com/v2/stocks/view/${d.code}`} target="_blank" rel="noreferrer">{d.name}</a>
+                    </td>
+                    <td style={{padding:"9px 14px",color:"#64748b",textAlign:"right",fontFamily:"monospace"}}>{d.code}</td>
+                    <td style={{padding:"9px 14px",color:"#64748b",fontSize:"12px",maxWidth:"160px",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{d.sector}</td>
+                    <td style={{padding:"9px 14px",textAlign:"right",fontWeight:600,color:"#f1f5f9",fontFamily:"monospace"}}>{d.price.toFixed(3)}</td>
+                    <td style={{padding:"9px 14px",textAlign:"right",color:"#34d399",fontFamily:"monospace"}}>{d.nta.toFixed(2)}</td>
+                    <td style={{padding:"9px 14px",textAlign:"right"}}>
+                      <span style={{background:`${c}20`,color:c,border:`1px solid ${c}50`,borderRadius:"4px",
+                        padding:"2px 7px",fontWeight:700,fontFamily:"monospace",fontSize:"12px"}}>{d.ptbv.toFixed(2)}</span>
+                    </td>
+                    <td style={{padding:"9px 14px",textAlign:"right"}}>
+                      <div style={{display:"flex",alignItems:"center",gap:"8px",justifyContent:"flex-end"}}>
+                        <div style={{width:"48px",height:"5px",background:"#0f172a",borderRadius:"3px",overflow:"hidden",flexShrink:0}}>
+                          <div style={{width:`${discW}%`,height:"100%",background:c,borderRadius:"3px"}}/>
+                        </div>
+                        <span style={{color:c,fontWeight:700,fontFamily:"monospace",fontSize:"12px",width:"34px",textAlign:"right"}}>{d.discount}%</span>
+                      </div>
+                    </td>
+                    <td style={{padding:"9px 14px",textAlign:"right",color:"#94a3b8",fontFamily:"monospace"}}>{d.mcap>=1000?(d.mcap/1000).toFixed(1)+"B":d.mcap.toFixed(0)+"M"}</td>
+                    <td style={{padding:"9px 14px",textAlign:"right",fontFamily:"monospace",
+                      color:d.roe>8?"#34d399":d.roe>0?"#86efac":"#f87171"}}>{d.roe.toFixed(1)}%</td>
+                    <td style={{padding:"9px 14px",textAlign:"right",fontFamily:"monospace",
+                      color:d.dy>3?"#fbbf24":d.dy>0?"#fde68a":"#475569"}}>{d.dy>0?d.dy.toFixed(1)+"%":"—"}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        {filtered.length===0&&(
+          <div style={{padding:"40px",textAlign:"center",color:"#475569"}}>No stocks match the current filters.</div>
+        )}
+      </div>
+
+      {/* Footer */}
+      <div style={{marginTop:"16px",display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:"8px"}}>
+        <p style={{color:"#334155",fontSize:"11px"}}>
+          ⚠️ Data from KLSE Screener. Verify NTA figures before trading. Not financial advice.
+        </p>
+        <a href="https://www.klsescreener.com/v2/" target="_blank" rel="noreferrer" style={{color:"#475569",fontSize:"11px"}}>
+          klsescreener.com →
+        </a>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(App));
+</script>
+</body>
+</html>
